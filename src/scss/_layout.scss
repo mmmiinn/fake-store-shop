@@ -1,0 +1,41 @@
+/* ****************** LAYOUT ********************** */
+
+html {
+  font-size: 10px;
+}
+body,
+table,
+th,
+td,
+button,
+select,
+input,
+textarea {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", "Nanum Gothic", "돋움", Dotum, Arial, sans-serif;
+  font-size: 1.4rem;
+  color: #111;
+  -webkit-text-size-adjust: none;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+body {
+  background-color: #fff;
+}
+table,
+th,
+td {
+  word-break: break-word;
+}
+input::-ms-clear,
+select::-ms-expand {
+  display: none;
+}
+textarea {
+  resize: none;
+}
+
+$color-primary: #221477;
+$url-images: "../assets/images/";

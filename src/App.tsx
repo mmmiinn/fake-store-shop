@@ -1,3 +1,4 @@
+import "./scss/style.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Signin from "./pages/LoginPage";
 import ShopMain from "./pages/MainPage";

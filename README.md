@@ -30,9 +30,9 @@ src
 ├── assets
 │   └── images
 ├── components
-│   ├── cart
-│   ├── cartItem
-│   ├── item
+│   └── cart
+│       ├──cartItem
+│       └──item
 ├── pages
 │   ├── loginPage
 │   ├── mainPage

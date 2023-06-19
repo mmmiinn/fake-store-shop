@@ -4,7 +4,7 @@ import { Button, Form, Input } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import winiPassLogo from "../../assets/hanger.png";
+import winiPassLogo from "../../assets/images/hanger.png";
 
 const WiniLogin: React.FC = () => {
   const navi = useNavigate();
@@ -68,7 +68,9 @@ const WiniLogin: React.FC = () => {
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="ID"
             value={form.username}
-            onChange={(e: any) => setInputIdValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setInputIdValue(e.target.value)
+            }
           />
         </Form.Item>
         <Form.Item
@@ -87,7 +89,9 @@ const WiniLogin: React.FC = () => {
             type="password"
             placeholder="PW"
             value={form.password}
-            onChange={(e: any) => setInputPasswordValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setInputPasswordValue(e.target.value)
+            }
           />
         </Form.Item>
         <Form.Item>
