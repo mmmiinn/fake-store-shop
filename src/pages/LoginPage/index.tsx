@@ -24,7 +24,7 @@ const WiniLogin: React.FC = () => {
     }
 
     try {
-      fetch("https://fakestoreapi.com/auth/login", {
+      const response = await fetch("https://fakestoreapi.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -33,13 +33,16 @@ const WiniLogin: React.FC = () => {
           username: inputIdValue,
           password: inputPasswordValue,
         }),
-      })
-        .then((res) => res.json())
-        .then((json) => localStorage.setItem("accessToken", json.token));
+      });
+      // .then((response) => response.json())
+      // .then((json) => console.log(json.status));
 
-      localStorage.setItem("companyName", "바른회사");
-
-      navi("/main");
+      if (response.status === 200) {
+        alert("환영합니다!");
+        navi("/main");
+      } else {
+        alert("로그인 정보를 확인해주세요");
+      }
     } catch (error) {
       console.log(error);
     }
