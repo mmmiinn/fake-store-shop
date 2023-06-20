@@ -49,7 +49,6 @@ src
 - `types`: typescript 타입 정의 폴더
 
 ## 기술 스택
-l
 ### UI
 
 styled-components
