@@ -11,6 +11,7 @@ $ https://fakestoreapi.com/
 
 ```bash
 $ git clone https://github.com/mmmiinn/fake-store-shop.git
+$ cd fake-store-shop
 $ yarn
 $ yarn dev
 ```
@@ -48,10 +49,12 @@ src
 - `types`: typescript 타입 정의 폴더
 
 ## 기술 스택
-
+l
 ### UI
 
 styled-components
+Tailwind CSS
+Ant Design 5.0
 
 ### 서버 상태 관리
 
