@@ -5,7 +5,6 @@ import { Button, Drawer, Spin } from "antd";
 import Item from "../../components/Cart/Item";
 import Cart from "../../components/Cart";
 import styled from "styled-components";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 
 export type CartItemType = {
   id: number;
@@ -115,56 +114,96 @@ const MainPage = () => {
   return isLoading ? (
     <Spin size="large" />
   ) : (
-    <div>
-      <CartBtn onClick={showDrawer}>
-        <ShoppingCartOutlined /> Open
-      </CartBtn>
-      <Drawer title="Cart" placement="right" onClose={onClose} open={open}>
-        <Cart
-          cartItems={cartItems}
-          addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
-        />
-      </Drawer>
-      <BtnCartegoryBox>
-        {category.map((product) => (
-          <BtnCartegory key={product} onClick={() => clickCartegory(product)}>
-            {product}
-          </BtnCartegory>
-        ))}
-        <BtnCartegory onClick={getAllCartegory}>all cartegory</BtnCartegory>
-      </BtnCartegoryBox>
+    <MainCart>
+      <TopInfo>
+        <div>
+          <button onClick={showDrawer}>
+            Cart<span>
+            {cartItems.length}
+            </span>
+          </button>
+        </div>
+      </TopInfo>
+      <MainCartArea>
+        <Drawer title="Cart" placement="right" onClose={onClose} open={open}>
+          <Cart
+            cartItems={cartItems}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+          />
+        </Drawer>
+        <BtnCartegoryBox>
+          <BtnCartegory onClick={getAllCartegory}>all cartegory</BtnCartegory>
+          {category.map((product) => (
+            <BtnCartegory key={product} onClick={() => clickCartegory(product)}>
+              {product}
+            </BtnCartegory>
+          ))}
+          
+        </BtnCartegoryBox>
 
-      <GridContainer>
-        {selCartegory.length > 0
-          ? selCartegory.map((item, index) => (
-              <Grid key={index.toString()}>
-                <Item item={item} handleAddtoCart={handleAddToCart} />
-              </Grid>
-            ))
-          : data?.map((item) => (
-              <Grid key={item.id}>
-                <Item item={item} handleAddtoCart={handleAddToCart} />
-              </Grid>
-            ))}
-      </GridContainer>
-    </div>
+        <GridContainer>
+          {selCartegory.length > 0
+            ? selCartegory.map((item, index) => (
+                <Grid key={index.toString()}>
+                  <Item item={item} handleAddtoCart={handleAddToCart} />
+                </Grid>
+              ))
+            : data?.map((item) => (
+                <Grid key={item.id}>
+                  <Item item={item} handleAddtoCart={handleAddToCart} />
+                </Grid>
+              ))}
+        </GridContainer>
+      </MainCartArea>
+    </MainCart>
   );
 };
 
 export default MainPage;
 
-const CartBtn = styled.button`
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 10px;
-  background-color: #0e154f;
-  color: #fff;
+const MainCart = styled.div`
+display:flex;
+flex-direction:column
+`
+
+const TopInfo = styled.div`
+padding: 10px;
+background-color:#0e154f;
+  div{
+    width:1200px;
+    margin:0 auto;
+    text-align: right;
+  }
+  button{
+    background: transparent;
+    border: none;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    position:relative;
+    span{
+      position:absolute;
+      right:-20px;
+      top:-8px;
+      padding:3px 5px;
+      border-radius:50%;
+      background-color:#f00;
+      color:#fff;
+      font-size:10px;
+    }
+  }
+`
+const MainCartArea = styled.div`
+  display:flex;
+  gap: 20px;
+  width: 1200px;
+  margin: 50px auto;
 `;
 
 const BtnCartegoryBox = styled.div`
-  padding-left: 100px;
+  flex:200px 0 0;
+  button{width: 100%;}
 `;
 const BtnCartegory = styled.button`
   padding: 10px;

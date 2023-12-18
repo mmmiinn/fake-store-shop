@@ -1,4 +1,5 @@
 import { Button } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
 import { CartItemType } from "../../../pages/MainPage";
 import styled from "styled-components";
 
@@ -12,6 +13,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => {
   return (
     <CartItemList>
       <div>
+        <span><CloseOutlined onClick={() => removeFromCart(item.id)} /></span>
         <h3>{item.title}</h3>
         <img src={item.image} alt={item.title} />
         <div className="countBtn">
@@ -46,8 +48,12 @@ const CartItemList = styled.div`
   .countBtn {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 10px;
     margin-bottom: 15px;
+    p{
+      margin:0
+    }
   }
   .priceBox {
     display: flex;
