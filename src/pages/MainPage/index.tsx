@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import { Button, Drawer, Spin } from "antd";
+import { Drawer, Spin } from "antd";
 import Item from "../../components/Cart/Item";
 import Cart from "../../components/Cart";
 import styled from "styled-components";
@@ -26,10 +26,26 @@ const MainPage = () => {
   const [category, setCategory] = useState([]);
   const [selCartegory, setSelCartegory] = useState([]);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
+  const [scrollY, setScrollY] = useState<number>(0);
+  const [btnTop, setBtnTop] = useState(false);
+
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     "products",
     getProducts
   );
+
+  const handleScroll = ()=>{
+    setScrollY(window.scrollY)
+    scrollY > 200 ? setBtnTop(true) : setBtnTop(false);   
+  }
+  
+  useEffect(()=>{
+    window.addEventListener('scroll',handleScroll);
+
+    return()=>{
+      window.removeEventListener('scroll',handleScroll)
+    }
+  },[])
 
   const getCartegory = async () => {
     try {
@@ -65,7 +81,7 @@ const MainPage = () => {
 
   const getAllCartegory = async () => {
     try {
-      const res = await fetch("https://fakestoreapi.com/products?limit=30");
+      const res = await fetch("https://fakestoreapi.com/products?limit=50");
       const data = await res.json();
       setSelCartegory(data);
     } catch (error) {
@@ -133,6 +149,8 @@ const MainPage = () => {
           />
         </Drawer>
         <BtnCartegoryBox>
+          <p>Scroll Y: {scrollY}</p>
+          <span>Fake-shop</span>
           <BtnCartegory onClick={getAllCartegory}>all cartegory</BtnCartegory>
           {category.map((product) => (
             <BtnCartegory key={product} onClick={() => clickCartegory(product)}>
@@ -156,6 +174,9 @@ const MainPage = () => {
               ))}
         </GridContainer>
       </MainCartArea>
+      <BtnTop className={btnTop? '': 'on'}>
+
+      </BtnTop>
     </MainCart>
   );
 };
@@ -164,7 +185,7 @@ export default MainPage;
 
 const MainCart = styled.div`
 display:flex;
-flex-direction:column
+flex-direction:column;
 `
 
 const TopInfo = styled.div`
@@ -203,23 +224,36 @@ const MainCartArea = styled.div`
 
 const BtnCartegoryBox = styled.div`
   flex:200px 0 0;
-  button{width: 100%;}
+  span{
+    display:block;
+    text-align: center;
+    font-family: 'Indie Flower', cursive;font-size:42px;
+    border-bottom: 2px solid #000;
+    margin-bottom:40px;
+  }
 `;
-const BtnCartegory = styled.button`
+const BtnCartegory = styled.a`
+display: block;
+width: inherit;
   padding: 10px;
   background-color: #0e154f;
   color: #fff;
   & + & {
-    margin-left: 1px;
+    border-top: 1px solid #fff;
   }
 `;
 
 const GridContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
 `;
-
 const Grid = styled.div`
-  flex: 20%;
+`
+const BtnTop = styled.span`
+  position: fixed;
+  bottom:30px;right:30px;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  color:#000;
 `;
