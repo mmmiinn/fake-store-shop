@@ -10,7 +10,9 @@ type Props = {
 const Item = ({ handleAddtoCart, item }: Props) => {
   return (
     <ItemBox>
-      <img src={item.image} alt="" />
+      <div className="imgArea">
+        <img src={item.image} alt="" />
+      </div>
       <div>
         <h3>{item.title}</h3>
         <p className="description">{item.description}</p>
@@ -24,6 +26,7 @@ const Item = ({ handleAddtoCart, item }: Props) => {
 export default Item;
 
 const ItemBox = styled.div`
+  .imgArea{ text-align:center}
   img {
     max-width: 200px;
     height: 200px;
